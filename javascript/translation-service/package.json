@@ -1,0 +1,36 @@
+{
+  "name": "@exercism/javascript-translation-service",
+  "description": "Exercism concept exercise on promises",
+  "author": "Derk-Jan Karrenbeld <derk-jan+github@karrenbeld.info>",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exercism/javascript.git",
+    "directory": "exercises/concept/translation-service"
+  },
+  "devDependencies": {
+    "@exercism/babel-preset-javascript": "^0.1.2",
+    "@exercism/eslint-config-javascript": "^0.6.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.22",
+    "babel-jest": "^27.5.1",
+    "core-js": "^3.21.0",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^27.5.0"
+  },
+  "scripts": {
+    "test": "jest ./*",
+    "watch": "jest --watch ./*",
+    "lint": "eslint ."
+  },
+  "bugs": {
+    "url": "https://github.com/exercism/javascript/issues"
+  },
+  "homepage": "https://github.com/exercism/javascript#readme",
+  "version": "1.0.0",
+  "main": "api.js",
+  "keywords": []
+}
