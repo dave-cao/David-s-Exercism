@@ -7,8 +7,10 @@ Problem:
     - make a function that tells if a word is an anagram of another
 """
 
+from collections import Counter
 
-def find_anagrams(word: str, candidates: list) -> set:
+
+def find_anagrams(word: str, candidates: list[str]) -> set[str]:
     """Find the anagrams of a word given a list of other words.
 
     Params:
@@ -18,20 +20,18 @@ def find_anagrams(word: str, candidates: list) -> set:
     Returns:
         - anagrams(set): the anagrams of the target word
     """
-
-    anagrams = set()
-    for candidate in candidates:
-        if is_anagram(word, candidate):
-            anagrams.add(candidate)
-
-    return anagrams
+    return {candidate for candidate in candidates if is_anagram(word, candidate)}
 
 
 def is_anagram(word: str, candidate: str) -> bool:
     """Determines if a word is an anagram of another word"""
 
+    # allows case insensitivity
+    word = word.lower()
+    candidate = candidate.lower()
+
     # a word cannot be an anagram of itself
-    if word.lower() == candidate.lower():
+    if word == candidate:
         return False
 
     target_word_count = count_letters(word)
@@ -39,9 +39,6 @@ def is_anagram(word: str, candidate: str) -> bool:
     return target_word_count == candidate_count
 
 
-def count_letters(word: str) -> dict:
+def count_letters(word: str) -> Counter[str]:
     """Counts the number of letters in a word and outputs it as a dictionary."""
-    word_count = {}
-    for letter in word.lower():
-        word_count[letter] = word_count.get(letter, 0) + 1
-    return word_count
+    return Counter(word)

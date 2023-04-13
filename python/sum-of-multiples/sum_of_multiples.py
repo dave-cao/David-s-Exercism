@@ -20,15 +20,6 @@ def sum_of_multiples(limit: int, multiples: list) -> int:
         sum(factors)(int): the sum of all the multiples of those numbers up to but no
             including the limit.
     """
-
-    factors = set()  # using set for unique values
-    for factor in multiples:
-        i = factor
-        while i < limit:
-            factors.add(i)
-            i += factor
-
-            if not i:  # accounts for a factor of 0
-                break
-
-    return sum(factors)
+    return sum(
+        {i for factor in multiples if factor for i in range(factor, limit, factor)}
+    )
