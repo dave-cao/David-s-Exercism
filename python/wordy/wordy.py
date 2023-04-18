@@ -11,11 +11,22 @@ Problem:
 def add(x, y):
     return x + y
 
+def minus(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    return x // y
+
+
+
 
 def answer(question: str) -> int:
     """Given a word equation, output its answer as an integer."""
 
-    operations = {"plus": add}
+    operations = {"plus": add, "minus": minus, "multiplied": multiply, "divided": divide}
 
     # Get rid of question mark from question and the "What is" part
     question = question[:-1]
@@ -25,21 +36,20 @@ def answer(question: str) -> int:
     word_list = question.split(" ")
 
     # turn str numbers in numbers
-    equation = [int(word) if word.isnumeric() else word for word in word_list]
-
-    result = 0
-    for i in range(0, len(equation), 3):  # we have to do this by 2
-        print(i)
-        # if i == 0:
-        #     result = operations[equation[i + 1]](equation[i], equation[i + 2])
-        # else:
-        #     result = operations[equation[i]](result, equation[i + 1])
-
-    # print(result)
-
-    # result = operations[equation[1]](equation[0], equation[2])
-
-    # print(result)
+    equation = [int(word) if word.lstrip("-").isnumeric() else word for word in word_list]
+    equation = [word for word in equation if word != "by"] # how to combine this with above
 
 
-answer("What is 1 plus 1 plus 1 plus 1 plus 1?")
+    # calculate the string equation
+    result = equation[0]
+    for i in range(1, len(equation), 2):  # we have to do this by 2
+        result = operations[equation[i]](result, equation[i + 1])
+
+
+    print(result)
+    return result
+
+
+answer("What is -3 plus 7 multiplied by -2?")
+
+# the problem now is negative numbers
