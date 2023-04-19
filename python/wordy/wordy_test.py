@@ -1,8 +1,6 @@
 import unittest
 
-from wordy import (
-    answer,
-)
+from wordy import answer
 
 # Tests adapted from `problem-specifications//canonical-data.json`
 
