@@ -7,21 +7,16 @@ Problem:
 
 def is_valid(isbn: str) -> bool:
     """Given an isbn string, check if it is a valid ISBN-10 number."""
-
-    digits = [digit for digit in isbn if digit != "-"]
-    digit_length = len(digits)  # record length of digits without dashes
-
     if not isbn:  # case of empty isbn
         return False
 
-    if digits[-1] == "X":  # makes sure x only works as a last digit check
-        digits = digits[:-1] + ["10"]
+    digits = [digit for digit in isbn if digit != "-"]
 
-    digits = [
-        digit for digit in digits if digit.isdigit()
-    ]  # make sure every item is digit
+    if digits[-1] == "X":
+        digits[-1] = "10"
 
-    if len(digits) != 10 or digit_length != 10:  # makes sure i is not out of range
+    # make sure isbn only has digits
+    if len(digits) != 10 or not all(digit.isnumeric() for digit in digits):
         return False
 
-    return not sum(int(digits[10 + i * -1]) * i for i in range(10, 0, -1)) % 11
+    return not sum((int(digit) * (10 - i)) for i, digit in enumerate(digits)) % 11
