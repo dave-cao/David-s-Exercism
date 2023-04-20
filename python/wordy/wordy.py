@@ -21,8 +21,14 @@ OPERATIONS = {
 def answer(question: str) -> int:
     """Given a word equation, output its answer as an integer."""
 
-    question = question[:-1]  # get rid of question mark at end of str
-    question = question[8:]  # get rid of "What is " in front of str
+    # clean question str
+    question = question.removeprefix("What is").removesuffix("?").strip()
+
+    if not question:  # if question is empty
+        raise ValueError("syntax error")
+    elif question.isdigit():  # is question is a single digit
+        return int(question)
+
     word_list = question.split(" ")
 
     # turn str numbers in numbers
@@ -35,11 +41,7 @@ def answer(question: str) -> int:
     # Checks to see if question has an unknown operation error
     operation_check = False
     for item in equation:
-        if (
-            item in OPERATIONS.keys()  # known operator in question
-            or item == ""  # accounts for "What is?"
-            or (len(equation) == 1 and type(equation[0] == int))  # "What is 5?" == 5
-        ):
+        if item in OPERATIONS.keys():
             operation_check = True
     if not operation_check:
         raise ValueError("unknown operation")
@@ -57,3 +59,6 @@ def answer(question: str) -> int:
             raise ValueError("syntax error")
 
     return int(result)
+
+
+print(answer("What is 17 minus 6 plus 3?"))
