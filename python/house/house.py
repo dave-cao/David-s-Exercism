@@ -4,41 +4,28 @@ Problem:
 - Recite the nursery rhyme 'This is the House that Jack Built' using
     recursion.
 """
-import re
 
 VERSES = [
-    "that lay in the house that Jack built.",
-    "that ate the malt",
-    "that killed the rat",
-    "that worried the cat",
-    "that tossed the dog",
-    "that milked the cow with the crumpled horn",
-    "that kissed the maiden all forlorn",
-    "that married the man all tattered and torn",
-    "that woke the priest all shaven and shorn",
-    "that kept the rooster that crowed in the morn",
-    "that belonged to the farmer sowing his corn",
-    "This is the horse and the hound and the horn",
+    "the house that Jack built.",
+    "the malt that lay in ",
+    "the rat that ate ",
+    "the cat that killed ",
+    "the dog that worried ",
+    "the cow with the crumpled horn that tossed ",
+    "the maiden all forlorn that milked ",
+    "the man all tattered and torn that kissed ",
+    "the priest all shaven and shorn that married ",
+    "the rooster that crowed in the morn that woke ",
+    "the farmer sowing his corn that kept ",
+    "the horse and the hound and the horn that belonged to ",
 ]
 
 
-def recurse(start_verse, end_verse):
-    if start_verse == end_verse:
-        VERSES[start_verse - 1] = re.sub(
-            ".*the", "This is the", VERSES[start_verse - 1]
-        )
-
-    verse = VERSES[start_verse - 1]
-
-    # base case
-    if start_verse == 1:
-        return verse
-    else:
-        return f"{verse} {recurse(start_verse - 1, end_verse)}"
+def chant_verse(start_verse: int) -> str:
+    """Recite the current numbered verse all the way to the end."""
+    return "This is " + "".join([VERSES[i] for i in range(start_verse - 1, -1, -1)])
 
 
-def recite(start_verse, end_verse):
-    return [recurse(i, i) for i in range(start_verse, end_verse + 1)]
-
-
-print(recite(2, 4))
+def recite(start_verse: int, end_verse: int) -> list[str]:
+    """Recite the nursery rhyme 'This is the House that Jack Built'"""
+    return [chant_verse(i) for i in range(start_verse, end_verse + 1)]
