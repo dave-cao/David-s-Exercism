@@ -1,8 +1,6 @@
 import unittest
 
-from house import (
-    recite,
-)
+from house import recite
 
 # Tests adapted from `problem-specifications//canonical-data.json`
 
