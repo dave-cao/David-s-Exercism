@@ -1,36 +1,39 @@
 """Exercism Python3: Rotational Cipher
 
-Problem:
-- Create the Caesar Cipher
-- Rotate the text "key" amount of times to the right in the alphabet
+Problem: 
+- Create a cipher that transposes letters in the alphabet based on a certain key.
+- a ROT13 is a shift in the alphabet 13 to the right
 """
 
-ALPHA = [*"abcdefghijklmnopqrstuvwxyz"]
+alpha_str = "abcdefghijklmnopqrstuvwxyz"
 
 
-def rotate(text, key):
-    # if we reach the end (z) then we go back to A
+def rotate(text: str, key: int) -> str:
+    """Return a transposed string based on key"""
 
-    # match text with alpha, then rotate
-    message = ""
+    transposed = ""
     for char in text:
-        if char.lower() in ALPHA:
-            index = ALPHA.index(char.lower())
-            rotation = index + key
+        index = alpha_str.find(char.lower())
 
-            if rotation > 25:
-                rotation = (rotation % 25) - 1  # -1 because index starts at 0
+        # If char is not in alphabet
+        if index == -1:
+            transposed += char
 
-            new_char = ALPHA[rotation]
-            if char.isupper():  # check if capital
-                new_char = new_char.upper()
-
-            message += new_char
+        # Char is in alphabet
         else:
-            message += char
+            shifted_index = index + key
 
-    return message
+            # account for over 25 limit
+            if shifted_index > 25:
+                shifted_index = shifted_index % 25 - 1
 
+            # turn shifted index into char
+            shifted_char = alpha_str[shifted_index]
 
-print(rotate("The brown fox.", 5))
-# sbk
+            # account for capital
+            if char.isupper():
+                shifted_char = shifted_char.upper()
+
+            transposed += shifted_char
+
+    return transposed

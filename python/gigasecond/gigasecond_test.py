@@ -1,9 +1,7 @@
-from datetime import datetime
 import unittest
+from datetime import datetime
 
-from gigasecond import (
-    add,
-)
+from gigasecond import add
 
 # Tests adapted from `problem-specifications//canonical-data.json`
 
