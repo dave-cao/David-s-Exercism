@@ -1,3 +1,3 @@
-# Documenting my Exercism Journey.
+[# Documenting my Exercism Journey.
 
-https://exercism.org/profiles/David-Cao/solutions
+https://exercism.org/profiles/David-Cao
